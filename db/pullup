@@ -1,0 +1,17 @@
+rm 1.5.cql
+rm 1.5.1.cql
+rm 1.5.2.cql
+rm base.cql
+rm ee.cql
+
+wget https://raw.githubusercontent.com/megamsys/verticegateway/1.5.2/db/base.cql
+wget https://raw.githubusercontent.com/megamsys/verticegateway/1.5.2/db/1.5.cql
+wget https://raw.githubusercontent.com/megamsys/verticegateway/1.5.2/db/1.5.1.cql
+wget https://raw.githubusercontent.com/megamsys/verticegateway/1.5.2/db/1.5.2.cql
+wget https://raw.githubusercontent.com/megamsys/verticegateway/1.5.2/db/ee.cql
+
+cqlsh 127.0.0.1 -f base.cql -u vertadmin -p vertadmin
+cqlsh 127.0.0.1 -f 1.5.cql -u vertadmin -p vertadmin
+cqlsh 127.0.0.1 -f 1.5.1.cql -u vertadmin -p vertadmin
+cqlsh 127.0.0.1 -f 1.5.2.cql -u vertadmin -p vertadmin
+cqlsh 127.0.0.1 -f ee.cql -u vertadmin -p vertadmin
