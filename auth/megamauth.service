@@ -1,0 +1,10 @@
+[Unit]
+Description=Megam Auth
+After=network.target
+After=runlevel2.target
+After=runlevel3.target
+After=runlevel4.target
+After=runlevel5.target
+[Service]
+ExecStart=/home/ram/auth/bin/oauth2_proxy -config=/home/ram/auth/oauth2_proxy.cnf
+KillMode=process
