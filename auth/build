@@ -4,9 +4,11 @@
 
 ABCD_HOME=~
 
-ABCD_AUTH_HOME=$ABCD_HOME/auth
+SUPPORT_HOME=$ABCD_HOME/bin/support
 
-ABCD_BUILD_HOME=$ABCD_HOME/bin/support/auth
+ABCD_BUILD_HOME=$SUPPORT_HOME/auth
+
+ABCD_AUTH_SERVICE=/etc/systemd/system/abcdauth.service
 
 cd $ABCD_HOME
 
@@ -36,10 +38,12 @@ wget https://raw.githubusercontent.com/megamsys/support/master/auth/oauth2_proxy
 
 sudo systemctl stop abcdauth
 
-sudo rm /etc/systemd/system/abcdauth.service
+sudo rm  $ABCD_AUTH_SERVICE
 
-sudo cp $ABCD_BUILD_HOME/abcdauth.service /etc/systemd/system/abcduth.service
+sudo cp $ABCD_BUILD_HOME/abcdauth.service /etc/systemd/system/abcdauth.service
 
-sudo systemctl start abcdauth
+sudo chmod 755 ABCD_AUTH_SERVICE
 
-echo "--- abcdauth complete.!"
+sudo systemctl start abcdauth.service
+
+echo "==> abcdauth.service is running."
