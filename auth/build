@@ -1,12 +1,14 @@
-### Lets convert it to a Habitat plan 
+### Lets convert it to a Habitat plan
 ###
 ###
 
-echo "--- abcdauth ..."
+ABCD_HOME=~
 
-MEGAM_AUTH_HOME=~
+ABCD_AUTH_HOME=$ABCD_HOME/auth
 
-cd $MEGAM_AUTH_HOME
+ABCD_BUILD_HOME=$ABCD_HOME/bin/support
+
+cd $ABCD_HOME
 
 rm oauth2_proxy*.tar.gz
 
@@ -36,8 +38,8 @@ sudo systemctl stop abcdauth
 
 rm /etc/systemd/system/abcdauth.service
 
-cp abcdauth.service /etc/systemd/system/abcduth.service
+cp $ABCD_BUILD_HOME/abcdauth.service /etc/systemd/system/abcduth.service
 
 sudo systemctl start megamauth
 
-echo "--- abcdauth Done.!"
+echo "--- abcdauth complete.!"
