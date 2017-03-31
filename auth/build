@@ -1,4 +1,8 @@
-### Can be used to build a container using habitat later.
+### Lets convert it to a Habitat plan 
+###
+###
+
+echo "--- abcdauth ..."
 
 MEGAM_AUTH_HOME=~
 
@@ -28,10 +32,12 @@ rm -rf oauth2_proxy-*
 
 wget https://raw.githubusercontent.com/megamsys/support/master/auth/oauth2_proxy.cnf
 
-sudo systemctl stop megamauth
+sudo systemctl stop abcdauth
 
-rm /etc/systemd/system/megamauth.service
+rm /etc/systemd/system/abcdauth.service
 
-cp megamauth.service /etc/systemd/system/megamauth.service
+cp abcdauth.service /etc/systemd/system/abcduth.service
 
 sudo systemctl start megamauth
+
+echo "--- abcdauth Done.!"
