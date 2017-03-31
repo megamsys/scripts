@@ -6,7 +6,7 @@ ABCD_HOME=~
 
 ABCD_AUTH_HOME=$ABCD_HOME/auth
 
-ABCD_BUILD_HOME=$ABCD_HOME/bin/support
+ABCD_BUILD_HOME=$ABCD_HOME/bin/support/auth
 
 cd $ABCD_HOME
 
@@ -40,6 +40,6 @@ rm /etc/systemd/system/abcdauth.service
 
 cp $ABCD_BUILD_HOME/abcdauth.service /etc/systemd/system/abcduth.service
 
-sudo systemctl start megamauth
+sudo systemctl start abcdauth
 
 echo "--- abcdauth complete.!"
