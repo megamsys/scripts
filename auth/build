@@ -2,15 +2,17 @@
 ###
 ###
 
-ABCD_HOME=~
+USER_HOME=~
 
-SUPPORT_HOME=$ABCD_HOME/bin/support
+SUPPORT_HOME=$USER_HOME/bin/support
 
-ABCD_BUILD_HOME=$SUPPORT_HOME/auth
+SUPPORT_AUTH_HOME=$SUPPORT_HOME/auth
+
+ABCD_HOME=$USER_HOME/auth
 
 ABCD_AUTH_SERVICE=/etc/systemd/system/abcdauth.service
 
-cd $ABCD_HOME
+cd $USER_HOME
 
 rm oauth2_proxy*.tar.gz
 
@@ -24,11 +26,11 @@ wget https://github.com/bitly/oauth2_proxy/releases/download/v2.1/oauth2_proxy-2
 
 tar -xvf  oauth2_proxy*.tar.gz
 
-mkdir -p auth/bin
+mkdir -p $ABCD_HOME/bin
 
 openssl req -new -newkey rsa:4096 -days 3650 -nodes -x509 \
     -subj "/C=IN/ST=TN/L=Chennai/O=Cloud/CN=auth.megam.io" \
-    -keyout ./auth/auth.megam.io.key  -out ./auth/auth.megam.io.cert
+    -keyout $ABCD_HOME/auth.megam.io.key  -out $ABCD_HOME/auth.megam.io.cert
 
 mv oauth2_proxy*/oauth2_proxy ./auth/bin
 
@@ -36,14 +38,18 @@ rm -rf oauth2_proxy-*
 
 wget https://raw.githubusercontent.com/megamsys/support/master/auth/oauth2_proxy.cnf
 
+mv  oauth2_proxy.cnf $ABCD_HOME
+
 sudo systemctl stop abcdauth
 
 sudo rm  $ABCD_AUTH_SERVICE
 
-sudo cp $ABCD_BUILD_HOME/abcdauth.service /etc/systemd/system/abcdauth.service
+sudo cp $SUPPORT_AUTH_HOME/abcdauth.service $ABCD_AUTH_SERVICE
 
-sudo chmod 755 ABCD_AUTH_SERVICE
+sudo chmod 755 $ABCD_AUTH_SERVICE
+
+sudo systemctl daemon-reload
 
 sudo systemctl start abcdauth.service
 
-echo "==> abcdauth.service is running."
+sudo systemctl status abcdauth.service
