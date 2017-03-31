@@ -36,9 +36,9 @@ wget https://raw.githubusercontent.com/megamsys/support/master/auth/oauth2_proxy
 
 sudo systemctl stop abcdauth
 
-rm /etc/systemd/system/abcdauth.service
+sudo rm /etc/systemd/system/abcdauth.service
 
-cp $ABCD_BUILD_HOME/abcdauth.service /etc/systemd/system/abcduth.service
+sudo cp $ABCD_BUILD_HOME/abcdauth.service /etc/systemd/system/abcduth.service
 
 sudo systemctl start abcdauth
 
